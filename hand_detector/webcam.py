@@ -8,7 +8,7 @@ import argparse
 
 def arguments_parser():
     parser = argparse.ArgumentParser(description="arguments parser")
-    parser.add_argument("--resolution", default=[640, 640], nargs=2, type=int)
+    parser.add_argument("--resolution", default=[1280, 640], nargs=2, type=int)
     args = parser.parse_args()
     return args
 
@@ -22,8 +22,8 @@ device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 print(f"Using device: {device}")
 
 # Load model and move it to the correct device
-model = YOLO("lewiswatson/yolov8x-tuned-hand-gestures").to(device)
-# model = YOLO("yolov8n.pt").to(device)
+# model = YOLO("lewiswatson/yolov8x-tuned-hand-gestures").to(device)
+model = YOLO("best.pt")
 
 box_annotator = sv.BoxAnnotator(thickness=2, text_thickness=2, text_scale=1)
 
@@ -41,6 +41,8 @@ while True:
 
     result = model(frame)[0]
     detections = sv.Detections.from_yolov8(result)
+
+    model.model.names[1] = "palm"
 
     labels = [
         f"{model.model.names[class_id]} {confidence:0.2f}"

@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+
+<head>
+    {% if title %}
+    <title>{{ title }} - H</title>
+    {% else %}
+    <title>Welcome to H</title>
+    {% endif %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <div>Hand: <a href="/index">Home</a></div>
+    <hr>
+    {% block content %}{% endblock %}
+</body>
+
+</html>
