@@ -39,7 +39,6 @@ def upload_trained():
 
 @app.route("/upload_trained", methods=["POST"])
 def upload_trained_file():
-    print("ne seriiii")
     if "video" not in request.files:
         return "No video file provided"
     file = request.files["video"]
@@ -62,7 +61,6 @@ def upload():
 
 @app.route("/upload", methods=["POST"])
 def upload_file():
-    print("ne seriiii")
     if "video" not in request.files:
         return "No video file provided"
     file = request.files["video"]
