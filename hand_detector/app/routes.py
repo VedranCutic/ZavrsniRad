@@ -1,10 +1,15 @@
 from app import app
-from flask import render_template, redirect, url_for, request
+from flask import render_template, redirect, url_for, request, send_from_directory
 import subprocess
 import os
 
-UPLOAD_FOLDER = "uploads"
+UPLOAD_FOLDER = "C:/ZavrsniRad/hand_detector/uploads"
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
+
+PREDICTED_FOLDER = "C:/ZavrsniRad/hand_detector/runs/detect/predict"
+app.config["PREDICTED_FOLDER"] = PREDICTED_FOLDER
+
+DELETE_FOLDER = "C:/ZavrsniRad/hand_detector/runs/detect"
 
 
 @app.route("/")
@@ -25,36 +30,77 @@ def webcam_trained():
 
 @app.route("/upload_trained")
 def upload_trained():
-    return render_template("upload_trained.html", title="upload")
+    filename = request.args.get("filename")
+    predicted = request.args.get("predicted")
+    return render_template(
+        "upload_trained.html", title="upload", filename=filename, predicted=predicted
+    )
 
 
-@app.route("/upload")
-def upload():
-    return render_template("upload.html", title="upload")
-
-
-@app.route("/upload", methods=["POST"])
-def upload_file():
+@app.route("/upload_trained", methods=["POST"])
+def upload_trained_file():
+    print("ne seriiii")
     if "video" not in request.files:
         return "No video file provided"
     file = request.files["video"]
     if file.filename == "":
         return "No selected file"
     if file:
-        filename = file.filename
-        file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
-        return redirect(url_for("playback", filename=filename))
+        filename_v = file.filename
+        file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename_v))
+        return redirect(url_for("upload_trained", title="upload", filename=filename_v))
+
+
+@app.route("/upload")
+def upload():
+    filename = request.args.get("filename")
+    predicted = request.args.get("predicted")
+    return render_template(
+        "upload.html", title="upload", filename=filename, predicted=predicted
+    )
+
+
+@app.route("/upload", methods=["POST"])
+def upload_file():
+    print("ne seriiii")
+    if "video" not in request.files:
+        return "No video file provided"
+    file = request.files["video"]
+    if file.filename == "":
+        return "No selected file"
+    if file:
+        filename_v = file.filename
+        file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename_v))
+        return redirect(url_for("upload", title="upload", filename=filename_v))
+
+
+@app.route("/predict_upload/<filename>")
+def predict_upload(filename):
+    # Execute the upload.py script with the provided filename
+    filename_v = os.path.join(app.config["UPLOAD_FOLDER"], filename)
+    subprocess.run(
+        ["python", "upload.py", "--model", "pretrained", "--file", filename_v]
+    )
+    return redirect(url_for("upload", filename=filename, predicted=filename))
+
+
+@app.route("/predict_upload_trained/<filename>")
+def predict_upload_trained(filename):
+    # Execute the upload.py script with the provided filename
+    filename_v = os.path.join(app.config["UPLOAD_FOLDER"], filename)
+    subprocess.run(["python", "upload.py", "--model", "trained", "--file", filename_v])
+    return redirect(url_for("upload_trained", filename=filename, predicted=filename))
 
 
 @app.route("/run-script")
-def run_script():
+def start_webcam():
     # This is where you can call your Python script
     subprocess.call(["python", "webcam.py", "--model", "pretrained"])
     return redirect(url_for("webcam"))
 
 
 @app.route("/run-script_trained")
-def run_script_trained():
+def start_webcam_trained():
     # This is where you can call your Python script
     subprocess.call(["python", "webcam.py", "--model", "trained"])
     return redirect(url_for("webcam_trained"))
@@ -65,3 +111,23 @@ def playback(filename):
     video_url = url_for("static", filename=os.path.join("uploads", filename))
     print(video_url)
     return render_template("playback.html", video_url=video_url)
+
+
+@app.route("/download/<filename>", methods=["GET"])
+def download_file(filename):
+    return send_from_directory(
+        directory=app.config["UPLOAD_FOLDER"], path=filename, as_attachment=True
+    )
+
+
+@app.route("/download_predicted/<filename>", methods=["GET"])
+def download_predicted(filename):
+    filename = filename.split(".")
+    if filename[1] == "mp4":
+        filename = f"{filename[0]}.avi"
+    elif filename[1] == "jpg":
+        filename = f"{filename[0]}.jpg"
+    print(filename)
+    return send_from_directory(
+        directory=app.config["PREDICTED_FOLDER"], path=filename, as_attachment=True
+    )
