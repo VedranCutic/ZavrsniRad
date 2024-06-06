@@ -1,3 +1,7 @@
+.header {
+    font-size: 2vw;
+}
+
 body {
     background-color: black;
     color: green;
@@ -9,28 +13,43 @@ h1 {
     text-align: center;
 }
 
+h2 {  text-align: center;
+}
+
 button {
     background-color: darkmagenta;
     font-size: 2vw;
     padding: 15px 32px;  
     border: none;
     border-radius: 12px;
-    
+    margin-right: 5vw;
 }
 
 button:hover {
-    background-color: magenta; /* Darker green on hover */
+    background-color: magenta;
+}
+
+
+.button-container h3 {
+margin-right: 2vw;
+
 }
 
 .button-container {
     display: flex;
-    justify-content: space-between; 
-    align-items: center;     
-    width: 100%;              
-    max-width: 600px;        
-    margin: 0 auto;           
-    flex-wrap: wrap;
+    justify-content: center; 
+    text-align: center;
+    width: 100%;             
+    max-width: 75vw; 
+    margin: 3vw auto;           
 }
+
+.button-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 
 .button-container2 {
     display: flex;
@@ -40,4 +59,19 @@ button:hover {
     max-width: 600px;        
     margin: 0 auto;           
     flex-wrap: wrap;
+}
+
+.button-container2 input[type="submit"]{
+    font-size: 1.7vw; 
+    border: none;
+    padding: 10px 20px;
+    border-radius: 12px;
+    background-color: darkmagenta;
+}
+
+.button-container2 input{
+    font-size: 1.7vw; 
+    border: none;
+    padding: 10px 20px;
+    border-radius: 12px;
 }

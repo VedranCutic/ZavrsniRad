@@ -1,14 +1,27 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Hello, world!</h1>
-<div class="button-container">
-    <form action="{{ url_for('webcam') }}" method="get">
-        <button type="submit">Use webcam</button>
-    </form>
+<h1>Hand detection and tracking</h1>
+<h2>Here you can choose between 4 options on 2 different models.</h2>
 
-    <form action="{{ url_for('upload') }}" method="get">
-        <button type="submit">Upload video</button>
-    </form>
+<div class="button-wrapper">
+    <div class="button-container">
+        <h3>Pretrained model </h3>
+        <form action="{{ url_for('webcam') }}" method="get">
+            <button type="submit">Use webcam</button>
+        </form>
+        <form action="{{ url_for('upload') }}" method="get">
+            <button type="submit">Upload video</button>
+        </form>
+    </div>
+    <div class="button-container">
+        <h3>Trained model </h3>
+        <form action="{{ url_for('webcam_trained') }}" method="get">
+            <button type="submit">Use webcam</button>
+        </form>
+        <form action="{{ url_for('upload_trained') }}" method="get">
+            <button type="submit">Upload video</button>
+        </form>
+    </div>
 </div>
 {% endblock %}

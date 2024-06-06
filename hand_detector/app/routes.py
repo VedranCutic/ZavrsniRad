@@ -18,6 +18,16 @@ def webcam():
     return render_template("webcam.html", title="webcam")
 
 
+@app.route("/webcam_trained")
+def webcam_trained():
+    return render_template("webcam_trained.html", title="webcam")
+
+
+@app.route("/upload_trained")
+def upload_trained():
+    return render_template("upload_trained.html", title="upload")
+
+
 @app.route("/upload")
 def upload():
     return render_template("upload.html", title="upload")
@@ -39,8 +49,15 @@ def upload_file():
 @app.route("/run-script")
 def run_script():
     # This is where you can call your Python script
-    subprocess.call(["python", "webcam.py"])
+    subprocess.call(["python", "webcam.py", "--model", "pretrained"])
     return redirect(url_for("webcam"))
+
+
+@app.route("/run-script_trained")
+def run_script_trained():
+    # This is where you can call your Python script
+    subprocess.call(["python", "webcam.py", "--model", "trained"])
+    return redirect(url_for("webcam_trained"))
 
 
 @app.route("/playback/<filename>")

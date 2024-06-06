@@ -9,6 +9,7 @@ import argparse
 def arguments_parser():
     parser = argparse.ArgumentParser(description="arguments parser")
     parser.add_argument("--resolution", default=[1280, 640], nargs=2, type=int)
+    parser.add_argument("--model")
     args = parser.parse_args()
     return args
 
@@ -17,19 +18,28 @@ def arguments_parser():
 # MAIN #
 ########
 
-# Set device to CPU explicitly
-device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-print(f"Using device: {device}")
-
-# Load model and move it to the correct device
-# model = YOLO("lewiswatson/yolov8x-tuned-hand-gestures").to(device)
-model = YOLO("best.pt")
-
-box_annotator = sv.BoxAnnotator(thickness=2, text_thickness=2, text_scale=1)
-
 
 args = arguments_parser()
 width, height = args.resolution
+
+if args.model == "pretrained":
+
+    print("running on pretrained data")
+
+    # Set device to CPU explicitly
+    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    print(f"Using device: {device}")
+
+    # Load model and move it to the correct device
+    model = YOLO("lewiswatson/yolov8x-tuned-hand-gestures").to(device)
+
+elif args.model == "trained":
+    print("running on trained data")
+    model = YOLO("best.pt")
+
+
+box_annotator = sv.BoxAnnotator(thickness=2, text_thickness=2, text_scale=1)
+
 
 # 0 is for webcam
 cap = cv2.VideoCapture(0)
