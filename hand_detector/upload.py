@@ -3,8 +3,6 @@ import torch
 import argparse
 import shutil
 
-model = YOLO("best.pt")
-
 
 def arguments_parser():
     parser = argparse.ArgumentParser(description="arguments parser")

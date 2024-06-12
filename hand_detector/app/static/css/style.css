@@ -1,97 +1,139 @@
-.header {
-    font-size: 2vw;
+/* /static/css/style.css */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+    color: #333;
 }
 
-body {
-    background-color: black;
-    color: green;
+header {
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    padding: 1em 0;
 }
 
 h1 {
-    color: green;
+    margin: 0;
+    margin-top: 30px;
+    text-align: center;
     font-size: 5vw;
+}
+
+h3 {
+    text-align: center;
+    margin-top: 30px;
+}
+
+main {
+    padding: 2em;
     text-align: center;
 }
 
-h2 {  text-align: center;
-}
-
-button {
-    background-color: darkmagenta;
-    font-size: 2vw;
-    padding: 15px 32px;  
-    border: none;
-    border-radius: 12px;
-    margin-right: 5vw;
-}
-
-button:hover {
-    background-color: magenta;
-}
-
-
-.button-container h3 {
-margin-right: 2vw;
-
-}
-
-.button-container {
-    display: flex;
-    justify-content: center; 
+h2 {
+    margin-top: 30px;
+    color: #555;
     text-align: center;
-    width: 100%;             
-    max-width: 75vw; 
-    margin: 3vw auto;           
 }
 
 .button-wrapper {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: center;
+    margin-top: 2em;
 }
 
+.button-container {
+    background-color: white;
+    padding: 2em;
+    margin: 0 1em;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    font-size: 1.5vw;
+    text-align: center;
+}
 
 .button-container2 {
     display: flex;
-    justify-content: center;  
-    align-items: center;      
-    width: 100%;              
-    max-width: 75vw;        
-    margin: 0 auto;           
-    flex-wrap: wrap;
+    align-items: center;
+    flex-direction: column;
 }
 
-.button-container2 input[type="submit"]{
-    font-size: 1.7vw; 
+.button-container h3 {
+    margin-top: 0;
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 0.5em;
+    margin: 0.5em 0;
+    font-size: 1.5vw;
+    color: white;
+    background-color: #4CAF50;
     border: none;
-    padding: 10px 20px;
-    border-radius: 12px;
-    background-color: darkmagenta;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
-.button-container2 input{
-    font-size: 1.7vw; 
+button:hover {
+    background-color: #45a049;
+}
+
+footer {
+    text-align: center;
+    padding: 1em 0;
+    background-color: #333;
+    color: white;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+.script {
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    font-size: 2vw;
+}
+
+.upload_file {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 1em; /* Add space between the file input and the submit button */
+}
+
+.upload_file input[type="file"] {
+    font-size: 1.5vw;
+}
+
+.upload_file input[type="submit"] {
+    font-size: 1.5vw;
+    padding: 0.5em 1em;
+    color: white;
+    background-color: #4CAF50;
     border: none;
-    padding: 10px 20px;
-    border-radius: 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
+.upload_file input[type="submit"]:hover {
+    background-color: #45a049;
+}
 
 .upload-container {
     display: flex;
-    justify-content: center; 
-    text-align: right;
-    width: 100%;             
-    max-width: 75vw; 
-    margin: 3vw auto;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2em;
 }
 
-.upload-container button, h3 {
-    font-size: 20px;
-    width: 25vw;
+.upload-container h3 {
+    margin: 0 1em;
+    font-size: 1.5vw;
 }
-
-.upload-container  h3 {
-   margin-left: 10px;
-}
-

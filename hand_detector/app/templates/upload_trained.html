@@ -4,7 +4,7 @@
 
 <h1>Upload file</h1>
 <div class="button-container2">
-    <form method="POST" enctype="multipart/form-data">
+    <form method="POST" enctype="multipart/form-data" class="upload_file">
         <input type="file" name="video">
         <input type="submit" value="Upload">
     </form>
@@ -15,10 +15,10 @@
 {% if filename %}
 <div class="upload-container">
     <h3 style="margin-right: 10px;">Uploaded file: </h3>
-    <h3 style="color: white;">{{ filename }} <a href="/download/{{ filename }}">Download File</a></h3>
+    <h3>{{ filename }} <a href="/download/{{ filename }}">Download File</a></h3>
     <div class="button-container2">
         <form action="{{ url_for('predict_upload_trained', filename=filename) }}" method="get">
-            <button type="submit">Predict upload</button>
+            <button type="submit">Detect</button>
         </form>
     </div>
 </div>
@@ -28,7 +28,7 @@
 {% if predicted %}
 <div class="upload-container">
     <h3>Predicted file: </h3>
-    <h3 style="color: white;">{{ predicted }} <a href="/download_predicted/{{ predicted }}"> Download File</a></h3>
+    <h3>{{ predicted }} <a href="/download_predicted/{{ predicted }}"> Download File</a></h3>
 
 </div>
 

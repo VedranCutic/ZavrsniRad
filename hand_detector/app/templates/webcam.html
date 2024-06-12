@@ -2,10 +2,12 @@
 
 {% block content %}
 
-<h1>Run Python Script</h1>
+<h2>Activating the webcam hand tracking will open a pop-up window</h2>
+<h2>that will detect and track hand movement.</h2>
+<h3>Close it by pressing the ESC button.</h3>
 <div class="button-container2">
     <form action="{{ url_for('start_webcam') }}" method="get">
-        <button type="submit">Activate webcam hand tracking</button>
+        <button type="submit" class="script">Activate webcam hand tracking</button>
     </form>
 </div>
 

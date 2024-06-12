@@ -20,12 +20,12 @@ def index():
 
 @app.route("/webcam")
 def webcam():
-    return render_template("webcam.html", title="webcam")
+    return render_template("webcam.html", title="Webcam")
 
 
 @app.route("/webcam_trained")
 def webcam_trained():
-    return render_template("webcam_trained.html", title="webcam")
+    return render_template("webcam_trained.html", title="Webcam")
 
 
 @app.route("/upload_trained")
@@ -33,7 +33,7 @@ def upload_trained():
     filename = request.args.get("filename")
     predicted = request.args.get("predicted")
     return render_template(
-        "upload_trained.html", title="upload", filename=filename, predicted=predicted
+        "upload_trained.html", title="Upload", filename=filename, predicted=predicted
     )
 
 
@@ -47,7 +47,7 @@ def upload_trained_file():
     if file:
         filename_v = file.filename
         file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename_v))
-        return redirect(url_for("upload_trained", title="upload", filename=filename_v))
+        return redirect(url_for("upload_trained", title="Upload", filename=filename_v))
 
 
 @app.route("/upload")
@@ -55,7 +55,7 @@ def upload():
     filename = request.args.get("filename")
     predicted = request.args.get("predicted")
     return render_template(
-        "upload.html", title="upload", filename=filename, predicted=predicted
+        "upload.html", title="Upload", filename=filename, predicted=predicted
     )
 
 
@@ -69,7 +69,7 @@ def upload_file():
     if file:
         filename_v = file.filename
         file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename_v))
-        return redirect(url_for("upload", title="upload", filename=filename_v))
+        return redirect(url_for("upload", title="Upload", filename=filename_v))
 
 
 @app.route("/predict_upload/<filename>")
