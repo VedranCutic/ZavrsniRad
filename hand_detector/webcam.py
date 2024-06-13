@@ -22,7 +22,6 @@ def arguments_parser():
 args = arguments_parser()
 width, height = args.resolution
 
-print(args.model)
 
 if args.model == "pretrained":
 
