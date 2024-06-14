@@ -125,6 +125,8 @@ def download_predicted(filename):
         filename = f"{filename[0]}.avi"
     elif filename[1] == "jpg":
         filename = f"{filename[0]}.jpg"
+    elif filename[1] == "jpeg":
+        filename = f"{filename[0]}.jpeg"
     print(filename)
     return send_from_directory(
         directory=app.config["PREDICTED_FOLDER"], path=filename, as_attachment=True

@@ -14,12 +14,20 @@ def arguments_parser():
 
 args = arguments_parser()
 if args.model == "pretrained":
-    model = YOLO("lewis.pt")
+    # Set device to CPU explicitly
+    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    print(f"Using device: {device}")
 
+    # Load model and move it to the correct device
+    model = YOLO("lewiswatson/yolov8x-tuned-hand-gestures").to(device)
+    print(model.model.names)
+    model.model.names[0] = "back-palm"
+    model.model.names[13] = "two"
     model.model.names[15] = "back-fist"
     model.model.names[16] = "front-fist"
     model.model.names[18] = "two"
-    model.model.names[19] = "open-palm"
+    model.model.names[19] = "one"
+    model.model.names[7] = "one"
     model.model.names[20] = "three"
     model.model.names[8] = "one"
 
