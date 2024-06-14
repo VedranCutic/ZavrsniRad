@@ -3,13 +3,13 @@ from flask import render_template, redirect, url_for, request, send_from_directo
 import subprocess
 import os
 
-UPLOAD_FOLDER = "C:/ZavrsniRad/hand_detector/uploads"
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+UPLOAD_FOLDER = os.path.join(BASE_DIR, "../uploads")
+PREDICTED_FOLDER = os.path.join(BASE_DIR, "../runs/detect/predict")
+DELETE_FOLDER = os.path.join(BASE_DIR, "../runs/detect")
+
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
-
-PREDICTED_FOLDER = "C:/ZavrsniRad/hand_detector/runs/detect/predict"
 app.config["PREDICTED_FOLDER"] = PREDICTED_FOLDER
-
-DELETE_FOLDER = "C:/ZavrsniRad/hand_detector/runs/detect"
 
 
 @app.route("/")
@@ -107,7 +107,6 @@ def start_webcam_trained():
 @app.route("/playback/<filename>")
 def playback(filename):
     video_url = url_for("static", filename=os.path.join("uploads", filename))
-    print(video_url)
     return render_template("playback.html", video_url=video_url)
 
 
@@ -127,7 +126,6 @@ def download_predicted(filename):
         filename = f"{filename[0]}.jpg"
     elif filename[1] == "jpeg":
         filename = f"{filename[0]}.jpeg"
-    print(filename)
     return send_from_directory(
         directory=app.config["PREDICTED_FOLDER"], path=filename, as_attachment=True
     )

@@ -40,7 +40,7 @@ if args.model == "pretrained":
 
 elif args.model == "trained":
     print("running on trained data")
-    model = YOLO("best2.pt")
+    model = YOLO("best.pt")
     model.model.names[0] = "palm"
     model.model.names[1] = "palm"
 
