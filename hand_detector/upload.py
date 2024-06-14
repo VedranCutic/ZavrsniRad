@@ -14,12 +14,7 @@ def arguments_parser():
 
 args = arguments_parser()
 if args.model == "pretrained":
-    # Set device to CPU explicitly
-    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-    print(f"Using device: {device}")
-
-    # Load model and move it to the correct device
-    model = YOLO("lewiswatson/yolov8x-tuned-hand-gestures").to(device)
+    model = YOLO("lewis.pt")
 
     model.model.names[15] = "back-fist"
     model.model.names[16] = "front-fist"
@@ -30,6 +25,7 @@ if args.model == "pretrained":
 
 elif args.model == "trained":
     model = YOLO("best.pt")
+    model.model.names[0] = "palm"
     model.model.names[1] = "palm"
 
 directory_to_delete = "runs/detect/predict"

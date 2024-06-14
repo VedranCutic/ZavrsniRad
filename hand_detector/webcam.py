@@ -24,26 +24,19 @@ width, height = args.resolution
 
 
 if args.model == "pretrained":
-
-    print("running on pretrained data")
-
-    # Set device to CPU explicitly
-    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-    print(f"Using device: {device}")
-
-    # Load model and move it to the correct device
-    model = YOLO("lewiswatson/yolov8x-tuned-hand-gestures").to(device)
+    model = YOLO("lewis.pt")
 
     model.model.names[15] = "back-fist"
     model.model.names[16] = "front-fist"
     model.model.names[18] = "two"
     model.model.names[19] = "open-palm"
-    model.model.names[20] = "three"
+    model.model.names[20] = "thumbs-up"
     model.model.names[8] = "one"
 
 elif args.model == "trained":
     print("running on trained data")
     model = YOLO("best2.pt")
+    model.model.names[0] = "palm"
     model.model.names[1] = "palm"
 
 

@@ -2,3 +2,6 @@
 yolo-Weights
 venv
 runs
+hand_detector/uploads 
+hand_detector/app/__pycache__/
+hand_detector/lewis.pt
