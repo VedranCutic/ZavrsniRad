@@ -31,12 +31,12 @@ if args.model == "pretrained":
     # Load model and move it to the correct device
     model = YOLO("lewiswatson/yolov8x-tuned-hand-gestures").to(device)
 
-    model.model.names[15] = "back-fist"
-    model.model.names[16] = "front-fist"
-    model.model.names[18] = "two"
-    model.model.names[19] = "open-palm"
-    model.model.names[20] = "thumbs-up"
-    model.model.names[8] = "one"
+    # model.model.names[15] = "back-fist"
+    # model.model.names[16] = "front-fist"
+    # model.model.names[18] = "two"
+    # model.model.names[19] = "open-palm"
+    # model.model.names[20] = "thumbs-up"
+    # model.model.names[8] = "one"
 
 elif args.model == "trained":
     print("running on trained data")
