@@ -22,12 +22,13 @@ if args.model == "pretrained":
     model = YOLO("lewiswatson/yolov8x-tuned-hand-gestures").to(device)
     print(model.model.names)
 
-    # model.model.names[15] = "back-fist"
-    # model.model.names[16] = "front-fist"
-    # model.model.names[18] = "two"
-    # model.model.names[19] = "open-palm"
-    # model.model.names[20] = "thumbs-up"
-    # model.model.names[8] = "one"
+    model.model.names[0] = "open-palm"
+    model.model.names[15] = "back-fist"
+    model.model.names[16] = "front-fist"
+    model.model.names[18] = "two"
+    model.model.names[19] = "open-palm"
+    model.model.names[20] = "thumbs-up"
+    model.model.names[8] = "one"
 
 elif args.model == "trained":
     model = YOLO("best.pt")
